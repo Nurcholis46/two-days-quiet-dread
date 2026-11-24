@@ -9,8 +9,8 @@ existential dread.
 import os
 
 COMMENT = (
-    "LGTM. The tests pass, the diff reads clean, and I have accepted "
-    "that this function will outlive everyone who approved it."
+    "LGTM. The tests pass, the diff reads clean, and this function "
+    "will outlive everyone who approved it, including me."
 )
 
 
@@ -21,7 +21,8 @@ def main() -> None:
     # melodrama: just a tired engineer making peace with the diff
     # before clicking approve.
     assert 1 <= len(COMMENT) <= 140, f"comment is {len(COMMENT)} chars"
-    assert COMMENT.strip() == COMMENT and "\n" not in COMMENT
+    assert COMMENT.strip() == COMMENT, "no leading/trailing whitespace"
+    assert "\n" not in COMMENT and "\r" not in COMMENT, "single line only"
     assert all(ord(c) >= 32 for c in COMMENT), "no control characters"
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
@@ -29,6 +30,11 @@ def main() -> None:
     with open(path, "w", encoding="utf-8") as f:
         f.write(COMMENT)
     os.chmod(path, 0o644)
+    # Read back and prove the file is byte-identical to the comment.
+    with open(path, "rb") as f:
+        written = f.read()
+    assert written == COMMENT.encode("utf-8"), "entry.txt mismatch"
+    assert written.count(b"\n") == 0, "entry.txt must be one line"
 
 
 if __name__ == "__main__":

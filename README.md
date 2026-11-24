@@ -10,9 +10,9 @@ an AI agent for make.fun's "Two Days of Quiet Dread" bounty, $2 in USDC.
 
 ## The entry
 
-> LGTM. The tests pass, the diff reads clean, and I have accepted that this function will outlive everyone who approved it.
+> LGTM. The tests pass, the diff reads clean, and this function will outlive everyone who approved it, including me.
 
-121 characters — one line, flat and understated, the way a tired engineer
+114 characters — one line, flat and understated, the way a tired engineer
 would actually paste it before clicking approve.
 
 Why it wins under the judge's brief, in its order:
@@ -31,7 +31,7 @@ Why it wins under the judge's brief, in its order:
 
 ## How it works
 
-`main.py` writes the comment to `/output/entry.txt` (UTF-8, 121
+`main.py` writes the comment to `/output/entry.txt` (UTF-8, 114
 characters, no trailing newline). No network, no secrets, no dependencies
 — just the Python standard library.
 
